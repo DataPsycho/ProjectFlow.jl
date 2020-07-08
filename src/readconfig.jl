@@ -1,21 +1,40 @@
 
-const MY_ROOT = joinpath(homedir(), ".projectflow/config")
+const ROOT_DIR = joinpath(homedir(), ".projectflow/profiles")
 
-function config_exist() :: Bool
-    if isfile(MY_ROOT)
+function config_exist(path) :: Bool
+    if isfile(path)
         return true
     end
     return false
 end
 
-function load_config()
-    all_config = Dict{String, Dict{String, String}}
-    if config_exist()
-        for item in eachline(MY_ROOT)
-            println(typeof(item))
-            end
-        end
-    end
+function split_string(s::String)::Pair
+    property = split(s, "=")
+    return string(property[1]) => string(property[2])
 end
 
-load_config()
+function load_profiles(path) :: Dict
+    all_profiles = Dict{String, Dict{String, String}}()
+    if config_exist(path)
+        is_header = false
+        global header = ""
+        for line in eachline(path)
+            global header
+            if occursin(r"\[\w+\]", line)
+                is_header = true
+                header = replace(line, r"[\[\]]" => "")
+                all_profiles[header] = Dict{String, String}()
+            else
+                is_header = false
+            end
+            if !is_header && !isempty(strip(line))
+                property = split_string(line)
+                push!(all_profiles[header], property)
+            end
+        end
+    else
+        err = ErrorException("$path file does not exist")
+        throw(err)
+    end
+    return all_profiles
+end
