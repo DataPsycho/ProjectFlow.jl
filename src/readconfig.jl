@@ -1,7 +1,7 @@
 
 const ROOT_DIR = joinpath(homedir(), ".projectflow/profiles")
 
-function config_exist(path) :: Bool
+function profiles_exist(path) :: Bool
     if isfile(path)
         return true
     end
@@ -15,7 +15,7 @@ end
 
 function load_profiles(path) :: Dict
     all_profiles = Dict{String, Dict{String, String}}()
-    if config_exist(path)
+    if profiles_exist(path)
         is_header = false
         global header = ""
         for line in eachline(path)
