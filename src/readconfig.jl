@@ -1,8 +1,17 @@
 const ROOT_DIR = joinpath(homedir(), ".projectflow/profiles")
 
-<<<<<<< HEAD
-function profiles_exist(path) :: Bool
-=======
+"""
+Check if profile file exist or not.
+# Argument
+- `path` File path of the profile directory.
+"""
+function config_exist(path::String) :: Bool
+    if isfile(path)
+        return true
+    end
+    return false
+end
+
 """
 Internal profile checker which check if the config file exist or not.
 
@@ -10,7 +19,6 @@ Internal profile checker which check if the config file exist or not.
 - `path` : File path of the profiles
 """
 function config_exist(path::String) :: Bool
->>>>>>> 4c2520247be31dc8e4fd690ec98804b9f1b06547
     if isfile(path)
         return true
     end
