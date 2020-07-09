@@ -1,4 +1,3 @@
-
 const ROOT_DIR = joinpath(homedir(), ".projectflow/profiles")
 
 """
