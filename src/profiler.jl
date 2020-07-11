@@ -43,7 +43,6 @@ function validate_profiles(p::Dict)
     ]
     missing_keys = []
     for (key, value) in p
-        print(key, value)
         for property in all_keys
             if !haskey(value, property)
                 push!(missing_keys, property)
@@ -100,5 +99,3 @@ function load_profiles(path::String)::Dict
     end
     return all_profiles
 end
-
-x = load_profiles(ROOT_DIR)
