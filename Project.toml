@@ -3,6 +3,9 @@ uuid = "7d1cd4b3-4447-4d54-bfa7-38e21a341f12"
 authors = ["Data Psycho"]
 version = "0.1.0"
 
+[deps]
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+
 [compat]
 julia = "1.4"
 

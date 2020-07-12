@@ -2,9 +2,10 @@ module ProjectFlow
 
 const ROOT_DIR = joinpath(homedir(), ".projectflow/profiles")
 
-include("utils.jl")
-include("profiler.jl")
+include("loader.jl")
 include("manager.jl")
+include("project.jl")
+include("logger.jl")
 
 function build(p::Project)
     try

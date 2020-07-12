@@ -36,7 +36,7 @@ end
 function validate(p::Project)
     issues = []
     if isempty(p.id)
-        push!(issues, "Prouect id should be unique and can not be empty")
+        push!(issues, "Project id should be unique and can not be empty")
     end
     if p.name |> clean_name |> strip |> split |> length < 3
         push!(issues,
@@ -69,4 +69,25 @@ function consolidate(p::Project)
         "profile" => p.profile
     )
     return metainfo
+end
+
+function isexist(m::Dict, p::Dict)
+    msg = []
+    root = p["project_root"]
+    projects = joinpath(root, p["projects_dir"])
+    datalake = joinpath(root, p["datalake"])
+    insights = joinpath(root, p["insights"])
+    meta_array = [projects, datalake, insights]
+    for path in meta_array
+        full_path = joinpath(path, m["full_name"])
+        if isdir(full_path)
+            push!(msg, "Project already exist at $full_path .")
+        end
+    end
+    if length(msg) > 0
+        str_msg = join(msg, "\n")
+        println(str_msg)
+        return true
+    end
+    return false
 end

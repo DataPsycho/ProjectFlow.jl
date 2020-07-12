@@ -1,8 +1,3 @@
-const ALL_KEYS = [
-    "project_root", "projects_dir", "data_dir",
-    "insights_dir", "insights_viz_dir", "insights_data_dir",
-]
-
 test_profile = Dict(
     "default" => Dict(
         "insights_viz_dir" => "vizfiles",
@@ -33,8 +28,8 @@ end
 function setup_flow(p::Dict)
 
 Set up the initial project flow. Execution of the function will
-create datalake, insights, vizfiles and datafiles in to given
-project roots.
+create datalake, insights, vizfiles and datafiles directories
+in to given project roots.
 
 # Argument
 - p: A dictionary auto read by the profiler.
@@ -53,5 +48,3 @@ function set_workflow(p::Dict, profile::String)
         throw(ex)
     end
 end
-
-set_workflow(test_profile, "default")
