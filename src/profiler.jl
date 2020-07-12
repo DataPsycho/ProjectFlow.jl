@@ -1,5 +1,3 @@
-const ROOT_DIR = joinpath(homedir(), ".projectflow/profiles")
-
 """
 Internal profile checker which check if the config file exist or not.
 
@@ -50,8 +48,8 @@ function validate_profiles(p::Dict)
         end
     end
     if !isempty(missing_keys)
-        temp = join(missing_keys, ", ")
-        err = ErrorException("$temp keys does not exist in profile.")
+        msg = join(missing_keys, ", ")
+        err = ErrorException("$msg keys does not exist in profile.")
         throw(err)
     end
 end
