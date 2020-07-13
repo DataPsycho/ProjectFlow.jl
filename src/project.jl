@@ -15,20 +15,6 @@ struct Project
     )
 end
 
-
-a_project = Project(
-    id="xyz",
-    name="My Fancy? *Project1 2 ",
-    template="jl",
-    profile="pycharm"
-)
-
-# wrong_project = Project(
-#     id="",
-#     name="Santa",
-#     template="kj"
-# )
-
 function clean_name(s::String)
     return replace(s, r"[^a-zA-Z]+" => " ")
 end
@@ -71,17 +57,15 @@ function consolidate(p::Project)
     return metainfo
 end
 
-function isexist(m::Dict, p::Dict)
+function isexist(m::Array{String})
     msg = []
-    root = p["project_root"]
-    projects = joinpath(root, p["projects_dir"])
-    datalake = joinpath(root, p["datalake"])
-    insights = joinpath(root, p["insights"])
-    meta_array = [projects, datalake, insights]
-    for path in meta_array
-        full_path = joinpath(path, m["full_name"])
-        if isdir(full_path)
-            push!(msg, "Project already exist at $full_path .")
+    for path in m
+        if isdir(path)
+            push!(msg, (
+                "Project already exist at $path. "
+                *"Loading the paths."
+                )
+            )
         end
     end
     if length(msg) > 0
@@ -90,4 +74,28 @@ function isexist(m::Dict, p::Dict)
         return true
     end
     return false
+end
+
+function load_or_create(n::String, prf::Dict)
+    i_viz_dir = ""
+    i_data_dir = ""
+    root = prf["project_root"]
+    projects = joinpath(root, prf["projects_dir"], n)
+    datalake = joinpath(root, prf["data_dir"], n)
+    insights = joinpath(root, prf["insights_dir"], n)
+    meta_array = [projects, datalake, insights]
+    iviz_dir = joinpath(insights, prf["insights_viz_dir"])
+    idata_dir = joinpath(insights, prf["insights_data_dir"])
+    if isexist(meta_array)
+        return true, datalake, iviz_dir, idata_dir
+    end
+    push!(meta_array, iviz_dir, idata_dir)
+    try
+        for path in meta_array
+            mkdir(path)
+        end
+        return false, datalake, iviz_dir, idata_dir
+    catch ex
+        throw(ex)
+    end
 end

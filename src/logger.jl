@@ -1,17 +1,15 @@
-using ProjectFlow: Project, consolidate, ROOT_DIR
-
-function write_append(p::String, c::String)
-    msg = "Project added to log successfully 😃!"
-    if !isfile(p)
-        open(p, "w") do io
-            print(io, "$c\n")
+function write_append(path::String, content::String)
+    msg = "Project added to log successfully."
+    if !isfile(path)
+        open(path, "w") do io
+            print(io, "$content\n")
         end
-        return print(msg)
+        return msg
     end
-    open(p, "a") do io
-        print(io, "$c\n")
+    open(path, "a") do io
+        print(io, "$content\n")
     end
-    return println(msg)
+    return msg
 end
 
 function log_project(path::String, prj::Project)
@@ -23,7 +21,9 @@ function log_project(path::String, prj::Project)
         *"$(p["created_date"])\t$(p["profile"])"
     )
     try
-        write_append(log_path, metainfo)
+        msg = write_append(log_path, metainfo)
+        print(msg)
+        return msg
     catch ex
         throw(ex)
     end

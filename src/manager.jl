@@ -1,14 +1,3 @@
-test_profile = Dict(
-    "default" => Dict(
-        "insights_viz_dir" => "vizfiles",
-        "insights_data_dir" => "datafiles",
-        "insights_dir" => "insights",
-        "projects_dir" => "projects",
-        "data_dir" => "datalake",
-        "project_root" => "/home/datapsycho/JuliaProjects/adhocs/"
-    )
-)
-
 """
 function make_dir(path::String)
 
@@ -18,7 +7,7 @@ Check if the following directory exist or not.
 - path: Full directory path.
 """
 
-function make_dir(path::String)
+function makedir(path::String)
     if !isdir(path)
         mkdir(path)
     end
@@ -34,16 +23,16 @@ in to given project roots.
 # Argument
 - p: A dictionary auto read by the profiler.
 """
-function set_workflow(p::Dict, profile::String)
-    properties = p[profile]
-    root = properties["project_root"]
-    projects = properties["projects_dir"]
-    data = properties["data_dir"]
-    insights = properties["insights_dir"]
+function set_workflow(p::Dict)
+    root = p["project_root"]
+    projects = p["projects_dir"]
+    data = p["data_dir"]
+    insights = p["insights_dir"]
     try
-        make_dir(joinpath(root, projects))
-        make_dir(joinpath(root, data))
-        make_dir(joinpath(root, insights))
+        makedir(joinpath(root, projects))
+        makedir(joinpath(root, data))
+        makedir(joinpath(root, insights))
+        return
     catch ex
         throw(ex)
     end

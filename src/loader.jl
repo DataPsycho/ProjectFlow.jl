@@ -68,6 +68,7 @@ profiles = load_profiles(ROOT_DIR)
 ```
 """
 function load_profiles(path::String)::Dict
+    path = joinpath(path, "profiles")
     all_profiles = Dict{String, Dict{String, String}}()
     if profiles_exist(path)
         is_header = false
@@ -96,4 +97,29 @@ function load_profiles(path::String)::Dict
         rethrow(ex)
     end
     return all_profiles
+end
+
+"""
+function select_property(path::String, name::String)
+
+Select property of a profile from a given profile value.
+
+# Argument
+- path: Path for Profile
+- name: Name of the Profile
+
+```
+Example:
+const ROOT_DIR = joinpath(homedir(), ".projectflow/")
+select_property(ROOT_DIR, "default")
+```
+"""
+function select_property(path::String, name::String)
+    try
+        profiles = load_profiles(path)
+        property = profiles[name]
+        return property
+    catch ex
+        rethrow(ex)
+    end
 end
