@@ -37,7 +37,7 @@ function log_project(path::String, prj::Dict)
     )
     try
         msg = write_append(log_path, metainfo)
-        print(msg)
+        println(msg)
         return msg
     catch ex
         throw(ex)

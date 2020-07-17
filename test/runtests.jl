@@ -16,7 +16,7 @@ const TEST_PROPERTIES = Dict(
     "insights_dir" => "insights",
     "projects_dir" => "projects",
     "data_dir" => "datalake",
-    "project_root" => "/home/datapsycho/JuliaProjects/adhocs/"
+    "project_root" => joinpath(homedir(), "JuliaProjects/adhocs/")
 )
 
 const A_PROJECT = ProjectFlow.Project(

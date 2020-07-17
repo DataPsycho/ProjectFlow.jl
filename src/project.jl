@@ -177,6 +177,7 @@ function load_or_create(n::String, prf::Dict)
         for path in meta_array
             mkdir(path)
         end
+        println("Project created at $projects")
         return false, datalake, iviz_dir, idata_dir
     catch ex
         throw(ex)
