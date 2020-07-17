@@ -1,6 +1,15 @@
 using Dates
 const TEMPLATE = ["jl"]
 
+"""
+Immutable type Project. Project hold:
+- Unique Project Id
+- Project name
+- Template extention jl tocreate .jl file, in future will
+have option for .ipynb notebook
+- The profile to use when creating projects, the default value
+is `default`
+"""
 struct Project
     id::String
     name::String
@@ -15,10 +24,42 @@ struct Project
     )
 end
 
+"""
+function clean_name(s::String)
+
+Take a strign remove spacial character from the string
+
+# Argument
+- s: String to remove special character
+
+Example:
+```
+clean_name("Here is < 12 ?")
+```
+"""
 function clean_name(s::String)
     return replace(s, r"[^a-zA-Z]+" => " ")
 end
 
+"""
+validate(p::Project)
+
+validate a given value of type project.
+
+#Arguemnt
+- p: Value of type project
+
+#Example
+```
+A_PROJECT = ProjectFlow.Project(
+    id="xyz",
+    name="My Fancy? *Project1 2 ",
+    template="jl",
+    profile="pycharm"
+)
+validate(A_PROJECT)
+```
+"""
 function validate(p::Project)
     issues = []
     if isempty(p.id)
@@ -40,8 +81,31 @@ function validate(p::Project)
     end
 end
 
+"""
+consolidate(p::Project)
 
+Consolidate a value of type project and return a Dict object
+with cleaned project name and newly added attribute.
+
+#Arguemnt
+- p: Value of type project
+
+#Example
+```
+A_PROJECT = ProjectFlow.Project(
+    id="xyz",
+    name="My Fancy? *Project1 2 ",
+    template="jl",
+    profile="pycharm"
+)
+consolidate(A_PROJECT)
+```
+"""
 function consolidate(p::Project)
+    try
+        validate(p)
+    catch ex
+        rethrow(ex)
     date_today = today()
     cleaned_name = p.name |> clean_name
     name_array =  cleaned_name |> strip |> split
@@ -57,6 +121,13 @@ function consolidate(p::Project)
     return metainfo
 end
 
+"""
+Internal function to check if a project already exist with the
+same name with a given profile
+
+#Argument
+- m: Array of string with all the path to check.
+"""
 function isexist(m::Array{String})
     msg = []
     for path in m
@@ -76,6 +147,18 @@ function isexist(m::Array{String})
     return false
 end
 
+"""
+Take new porject fullname and profile path. create a new
+project if the project does not exist or load the path of
+the project if the project already exist.
+
+#Argument
+- n: new project name
+- prf: loaded profile
+
+return if the project exist as true/false and all relevant
+path.
+"""
 function load_or_create(n::String, prf::Dict)
     i_viz_dir = ""
     i_data_dir = ""
