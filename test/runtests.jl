@@ -1,10 +1,11 @@
 using ProjectFlow
 using Test
 
+
 dirs = ["JuliaProjects", "adhocs"]
 for dir in dirs
     fpath = joinpath(homedir(), dir)
-    if !isdir()
+    if !isdir(fpath)
         mkdir(fpath)
     end
 end
