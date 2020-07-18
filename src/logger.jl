@@ -28,12 +28,12 @@ Log a project after consolidation to the given project.
 - path: path of the log file.
 - prj: The consolidated project dictionary
 """
-function log_project(path::String, prj::Dict)
+function log_project(path::String, pj::Dict)
     log_file = "projects.log"
     log_path = joinpath(path, log_file)
     metainfo = (
-        "$(p["uid"])\t$(p["name"])\t$(p["full_name"])\t"
-        *"$(p["created_date"])\t$(p["profile"])"
+        "$(pj["uid"])\t$(pj["name"])\t$(pj["full_name"])\t"
+        *"$(pj["created_date"])\t$(pj["profile"])"
     )
     try
         msg = write_append(log_path, metainfo)

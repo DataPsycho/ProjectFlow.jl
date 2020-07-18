@@ -1,20 +1,14 @@
 module ProjectFlow
 
-const ROOT_DIR = joinpath(homedir(), ".projectflow/")
+const PF_ROOT = joinpath(homedir(), ".projectflow/")
 
 include("loader.jl")
 include("manager.jl")
 include("project.jl")
 include("logger.jl")
+include("template.jl")
 
-# export Project, build
-
-p = Project(
-    id="xyz",
-    name="My Fancy? *Project1 2 ",
-    template="jl",
-    profile="default"
-)
+export Project, initiate
 
 """
 function initiate(p::Project)
@@ -37,14 +31,22 @@ p = Project(
 initiate(p)
 ```
 """
-function build_load(p::Project, prp::Dict)
-    properties = select_property(ROOT_DIR, p.profile)
+function initiate(p::Project)
+    properties = select_property(PF_ROOT, p.profile)
     set_workflow(properties)
     meta_info = consolidate(p)
     name = meta_info["full_name"]
-    pexist, datalake, iviz, idata = load_or_create(name, properties)
+    pexist, datalake, iviz, idata = pathfinder(name, properties)
     if !pexist
-        log_project("./", meta_info)
+        log_project(PF_ROOT, meta_info)
+        pmap = Dict(
+            "i" => p.id,
+            "n" => p.name,
+            "t" => p.template,
+            "p" => p.profile,
+        )
+        p = project_path(name, properties)
+        save_template(p, pmap)
     end
     return datalake, iviz, idata
 end

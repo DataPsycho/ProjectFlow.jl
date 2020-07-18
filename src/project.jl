@@ -1,5 +1,5 @@
 using Dates
-const TEMPLATE = ["jl"]
+const CODEFILES_EXT = ["jl"]
 
 """
 Immutable type Project. Project hold:
@@ -38,7 +38,7 @@ clean_name("Here is < 12 ?")
 ```
 """
 function clean_name(s::String)
-    return replace(s, r"[^a-zA-Z]+" => " ")
+    return replace(s, r"[^a-zA-Z]+" => " ") |> strip
 end
 
 """
@@ -71,8 +71,8 @@ function validate(p::Project)
              *"excluding numbers and spacial character")
         )
     end
-    if p.template ∉ TEMPLATE
-        push!(issues, "Only $(join(TEMPLATE, ",")) is allowed as template parameter")
+    if p.template ∉ CODEFILES_EXT
+        push!(issues, "Only $(join(CODEFILES_EXT, ",")) is allowed as template parameter")
     end
     if !isempty(issues)
         msg = join(issues, ", \n")
@@ -106,6 +106,7 @@ function consolidate(p::Project)
         validate(p)
     catch ex
         rethrow(ex)
+    end
     date_today = today()
     cleaned_name = p.name |> clean_name
     name_array =  cleaned_name |> strip |> split
@@ -148,6 +149,21 @@ function isexist(m::Array{String})
 end
 
 """
+pathfinder(n::String, prf::Dict)
+
+Up on giving profile name and consolidated Profile Dict it create the path to
+the project folder.
+
+#Argument
+- n: new project name
+- prf: loaded profi
+"""
+function project_path(n::String, prf::Dict)
+    project = joinpath(prf["project_root"], prf["projects_dir"], n)
+    return project
+end
+
+"""
 Take new porject fullname and profile path. create a new
 project if the project does not exist or load the path of
 the project if the project already exist.
@@ -159,14 +175,14 @@ the project if the project already exist.
 return if the project exist as true/false and all relevant
 path.
 """
-function load_or_create(n::String, prf::Dict)
+function pathfinder(n::String, prf::Dict)
     i_viz_dir = ""
     i_data_dir = ""
     root = prf["project_root"]
-    projects = joinpath(root, prf["projects_dir"], n)
+    project = project_path(n, prf)
     datalake = joinpath(root, prf["data_dir"], n)
     insights = joinpath(root, prf["insights_dir"], n)
-    meta_array = [projects, datalake, insights]
+    meta_array = [project, datalake, insights]
     iviz_dir = joinpath(insights, prf["insights_viz_dir"])
     idata_dir = joinpath(insights, prf["insights_data_dir"])
     if isexist(meta_array)
@@ -177,7 +193,7 @@ function load_or_create(n::String, prf::Dict)
         for path in meta_array
             mkdir(path)
         end
-        println("Project created at $projects")
+        println("Project created at $project")
         return false, datalake, iviz_dir, idata_dir
     catch ex
         throw(ex)

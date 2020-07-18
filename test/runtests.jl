@@ -23,7 +23,7 @@ const A_PROJECT = ProjectFlow.Project(
     id="xyz",
     name="My Fancy? *Project1 2 ",
     template="jl",
-    profile="pycharm"
+    profile="default"
 )
 
 # Tests for Profile Loader
@@ -55,6 +55,15 @@ end
 @testset "Logger Activity" begin
     @testset "Check Project Logging" begin
         msg = "Project added to log successfully."
-        @test ProjectFlow.log_project("./", A_PROJECT) == msg
+        meta_info = ProjectFlow.consolidate(A_PROJECT)
+        @test ProjectFlow.log_project("../temp", meta_info) == msg
+    end
+end
+
+# Test for Logger
+@testset "Module Test" begin
+    @testset "Main Module Tests" begin
+        datalake, iviz, idata = initiate(A_PROJECT)
+        @test !isempty(datalake)
     end
 end
