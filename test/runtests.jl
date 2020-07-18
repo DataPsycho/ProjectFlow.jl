@@ -55,11 +55,11 @@ const A_PROJECT = ProjectFlow.Project(
 end
 
 # Test for Managers
-@testset "File Manager Activity" begin
-    @testset "Initiate Profile from Property" begin
-        @test ProjectFlow.set_workflow(TEST_PROPERTIES) == nothing
-    end
-end
+# @testset "File Manager Activity" begin
+#     @testset "Initiate Profile from Property" begin
+#         @test ProjectFlow.set_workflow(TEST_PROPERTIES) == nothing
+#     end
+# end
 
 # Test for Logger
 # @testset "Logger Activity" begin
