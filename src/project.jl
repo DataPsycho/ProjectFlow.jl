@@ -47,7 +47,7 @@ validate a given value of type project.
 #Arguemnt
 - p: Value of type project
 
-#Example
+# Example
 ```
 A_PROJECT = ProjectFlow.Project(
     id="xyz",
@@ -88,7 +88,7 @@ with cleaned project name and newly added attribute.
 #Arguemnt
 - p: Value of type project
 
-#Example
+# Example
 ```
 A_PROJECT = ProjectFlow.Project(
     id="xyz",
@@ -124,7 +124,7 @@ end
 Internal function to check if a project already exist with the
 same name with a given profile
 
-#Argument
+# Argument
 - m: Array of string with all the path to check.
 """
 function isexist(m::Array{String})
@@ -152,7 +152,7 @@ pathfinder(n::String, prf::Dict)
 Up on giving profile name and consolidated Profile Dict it create the path to
 the project folder.
 
-#Argument
+# Argument
 - n: new project name
 - prf: loaded profi
 """
@@ -166,7 +166,7 @@ Take new porject fullname and profile path. create a new
 project if the project does not exist or load the path of
 the project if the project already exist.
 
-#Argument
+# Argument
 - n: new project name
 - prf: loaded profile
 

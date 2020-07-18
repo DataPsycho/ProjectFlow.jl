@@ -3,7 +3,7 @@ write_append(path::String, content::String)
 
 Create the file if not exist. If exist write to file.
 
-#Argument
+# Argument
 - path: path to write file
 - content: The content to write in the file
 """
@@ -24,7 +24,7 @@ end
 """
 Log a project after consolidation to the given project.
 
-#Argument
+# Argument
 - path: path of the log file.
 - prj: The consolidated project dictionary
 """
