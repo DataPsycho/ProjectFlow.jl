@@ -24,7 +24,7 @@ jobs:
         julia --project=docs -e '
           using Pkg
           pkg"activate ."
-          Pkg.add("Documenter")'
+          Pkg.add("Documenter")
           Pkg.develop(PackageSpec(path=pwd()))
           Pkg.instantiate()
           include("docs/make.jl")'
