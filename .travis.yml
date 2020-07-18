@@ -23,6 +23,8 @@ jobs:
       script: |
         julia --project=docs -e '
           using Pkg
+          pkg"activate .."
+          push!(LOAD_PATH,"./src/")
           Pkg.develop(PackageSpec(path=pwd()))
           Pkg.instantiate()
           include("docs/make.jl")'
