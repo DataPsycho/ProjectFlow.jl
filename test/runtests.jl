@@ -62,13 +62,13 @@ end
 end
 
 # Test for Logger
-@testset "Logger Activity" begin
-    @testset "Check Project Logging" begin
-        msg = "Project added to log successfully."
-        meta_info = ProjectFlow.consolidate(A_PROJECT)
-        @test ProjectFlow.log_project("./", meta_info) == msg
-    end
-end
+# @testset "Logger Activity" begin
+#     @testset "Check Project Logging" begin
+#         msg = "Project added to log successfully."
+#         meta_info = ProjectFlow.consolidate(A_PROJECT)
+#         @test ProjectFlow.log_project("./", meta_info) == msg
+#     end
+# end
 
 # Test for Logger
 # @testset "Module Test" begin
