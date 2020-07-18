@@ -20,7 +20,7 @@ cache_template(p::Dict, t::String)
 Load the template in the memory and replace the idetifier with given value of
 stirng.
 
-#Argument
+# Argument
 - p: map of pared values of identifier and replacer
 - t: text templare to replace the identiter with value
 """
@@ -38,7 +38,7 @@ make_template(path::String, p::Dict, t::String)
 Make a template based on given project info and path and save it to projrct
 folder.
 
-#Argument
+# Argument
 - path: Path to save the cached template
 - p: map of pared values of identifier and replacer
 - t: text templare to replace the identiter with value
