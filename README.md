@@ -18,7 +18,7 @@ profile name and properties. Inside of priofile file should looks like this:
 
 ```
 [default]
-project_root=/home/datapsycho/JuliaProjects/adhocs
+project_root=/home/datapsycho/.JuliaProjects/adhocs
 projects_dir=projects
 data_dir=datalake
 insights_dir=insights
@@ -32,7 +32,7 @@ will be stored in `datalake` our visuals will be stored in `insights/vizfiles`
 and our post analysis report data will be stored in `insights/datafiles`.
 
 __The Root Project folders must be created before going to next step. which is
-`JuliaProjects/adhocs` in the examples.__
+`.JuliaProjects/adhocs` in the examples.__
 
 - Next we have to create type called project and run the `Initiate` method.
 Either it will crate a new project or it will load the paths of existing
@@ -88,5 +88,20 @@ Which is the starting point of start writing adhoc dataanalytics single file
 project.
 
 _You might want to create a separate environment for whole adhocs project and
-an initializer jl file  filled up with inittiate(p) code and use it every time
+an initializer jl file  filled up with init code and use it every time
 before starting a new project._
+
+
+```julia
+# initializer.jl file
+using ProjectFlow
+
+p = ProjectFlow.Project(
+    id="xyz",
+    name="My Fancy? *Project1 2 ",
+    template="jl",
+    profile="default"
+)
+
+datalake, iviz, idata = initiate(p)
+```
