@@ -25,7 +25,6 @@ jobs:
           using Pkg
           pkg"activate ."
           Pkg.add("Documenter")
-          Pkg.develop(PackageSpec(path=pwd()))
           Pkg.instantiate()
           include("docs/make.jl")'
       after_success: skip
