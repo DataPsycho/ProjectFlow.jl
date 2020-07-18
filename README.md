@@ -18,7 +18,7 @@ profile name and properties. Inside of priofile file should looks like this:
 
 ```
 [default]
-project_root=/home/datapsycho/.JuliaProjects/adhocs
+project_root=/home/datapsycho/JuliaProjects/adhocs
 projects_dir=projects
 data_dir=datalake
 insights_dir=insights
@@ -32,7 +32,7 @@ will be stored in `datalake` our visuals will be stored in `insights/vizfiles`
 and our post analysis report data will be stored in `insights/datafiles`.
 
 __The Root Project folders must be created before going to next step. which is
-`.JuliaProjects/adhocs` in the examples.__
+`JuliaProjects/adhocs` in the examples.__
 
 - Next we have to create type called project and run the `Initiate` method.
 Either it will crate a new project or it will load the paths of existing
