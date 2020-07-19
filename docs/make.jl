@@ -1,9 +1,7 @@
-using Pkg
-pkg"activate .."
-push!(LOAD_PATH,"../src/")
-
-using ProjectFlow
-using Documenter
+# using Pkg
+# pkg"activate .."
+# push!(LOAD_PATH,"../src/")
+using ProjectFlow, Documenter
 
 makedocs(;
     modules=[ProjectFlow],
