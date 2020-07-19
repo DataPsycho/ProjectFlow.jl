@@ -52,9 +52,9 @@ uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[Parsers]]
 deps = ["Dates", "Test"]
-git-tree-sha1 = "20ef902ea02f7000756a4bc19f7b9c24867c6211"
+git-tree-sha1 = "10134f2ee0b1978ae7752c41306e131a684e1f06"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-version = "1.0.6"
+version = "1.0.7"
 
 [[Pkg]]
 deps = ["Dates", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "UUIDs"]
@@ -65,6 +65,7 @@ deps = ["Unicode"]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 
 [[ProjectFlow]]
+deps = ["Dates", "Documenter", "Printf"]
 path = ".."
 uuid = "7d1cd4b3-4447-4d54-bfa7-38e21a341f12"
 version = "0.1.0"
