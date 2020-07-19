@@ -1,3 +1,5 @@
 [deps]
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
-ProjectFlow = "7d1cd4b3-4447-4d54-bfa7-38e21a341f12"
+
+[compat]
+Documenter = "~0.25"

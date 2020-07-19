@@ -64,11 +64,6 @@ uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 deps = ["Unicode"]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 
-[[ProjectFlow]]
-path = ".."
-uuid = "7d1cd4b3-4447-4d54-bfa7-38e21a341f12"
-version = "0.1.0"
-
 [[REPL]]
 deps = ["InteractiveUtils", "Markdown", "Sockets"]
 uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
