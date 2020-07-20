@@ -4,11 +4,7 @@ CurrentModule = ProjectFlow
 
 # ProjectFlow
 
-```@index
-```
-
-ProjectFlow is a ad-hoc analytics project manager. Upon creating a new type
-`Project` and providing it to `initiate` function will crate all necessary
+ProjectFlow is a ad-hoc analytics project manager. Upon creating a new type `Project` and providing it to `initiate` function will crate all necessary
 directory into local machine to start working on the project.
 
 ## Steps:
@@ -105,6 +101,11 @@ p = ProjectFlow.Project(
 )
 
 datalake, iviz, idata = initiate(p)
+```
+
+## Internal Methods Index
+
+```@index
 ```
 
 ```@autodocs
