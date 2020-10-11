@@ -118,6 +118,10 @@ function select_property(path::String, name::String)
     try
         profiles = load_profiles(path)
         property = profiles[name]
+        root = property["project_root"]
+        property["projects_dir"] = joinpath(root, property["projects_dir"])
+        property["data_dir"] = joinpath(root, property["data_dir"])
+        property["insights_dir"] = joinpath(root, property["insights_dir"])
         return property
     catch ex
         rethrow(ex)

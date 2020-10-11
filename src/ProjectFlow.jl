@@ -35,8 +35,8 @@ function initiate(p::Project)
     properties = select_property(PF_ROOT, p.profile)
     set_workflow(properties)
     meta_info = consolidate(p)
-    name = meta_info["full_name"]
-    pexist, datalake, iviz, idata = pathfinder(name, properties)
+    # name = meta_info["full_name"]
+    pexist, project, datalake, iviz, idata = pathfinder(meta_info, properties)
     if !pexist
         log_project(PF_ROOT, meta_info)
         pmap = Dict(
@@ -45,8 +45,7 @@ function initiate(p::Project)
             "t" => p.template,
             "p" => p.profile,
         )
-        p = project_path(name, properties)
-        save_template(p, pmap)
+        save_template(project, pmap)
     end
     return datalake, iviz, idata
 end
